@@ -1,0 +1,83 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=marti_challenge_secret
+      - POSTGRES_USER=marti_challenge_user
+      - POSTGRES_DB=marti_challenge_db
+    networks:
+      - web
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: marti_user
+      RABBITMQ_DEFAULT_PASS: marti_password
+    networks:
+      - web
+
+  auth_module:
+    image: auth-module:latest
+    container_name: auth-module
+    environment:
+      QUEUE_NAME: auth_queue
+    ports:
+      - "3102:3002"
+    networks:
+      - web
+
+  area_module:
+    image: area-module:latest
+    container_name: area-module
+    environment:
+      QUEUE_NAME: area_queue
+    ports:
+      - "3103:3002"
+    networks:
+      - web
+
+  location_module:
+    image: location-module:latest
+    container_name: location-module
+    environment:
+      QUEUE_NAME: location_queue
+    ports:
+      - "3104:3002"
+    networks:
+      - web
+
+  logging_module:
+    image: logging-module:latest
+    container_name: logging-module
+    environment:
+      QUEUE_NAME: logging_queue
+    ports:
+      - "3105:3002"
+    networks:
+      - web
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "3000:3000"
+    volumes:
+      - ./nginx/default:/etc/nginx/sites-available/default
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
