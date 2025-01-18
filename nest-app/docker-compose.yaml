@@ -32,7 +32,6 @@ services:
     container_name: auth-module
     environment:
       QUEUE_NAME: auth_queue
-      PORT: 3002
     ports:
       - "3102:3002"
     networks:
@@ -43,9 +42,8 @@ services:
     container_name: area-module
     environment:
       QUEUE_NAME: area_queue
-      PORT: 3003
     ports:
-      - "3103:3003"
+      - "3103:3002"
     networks:
       - web
 
@@ -54,9 +52,8 @@ services:
     container_name: location-module
     environment:
       QUEUE_NAME: location_queue
-      PORT: 3004
     ports:
-      - "3104:3004"
+      - "3104:3002"
     networks:
       - web
 
@@ -65,9 +62,8 @@ services:
     container_name: logging-module
     environment:
       QUEUE_NAME: logging_queue
-      PORT: 3005
     ports:
-      - "3105:3005"
+      - "3105:3002"
     networks:
       - web
 
@@ -76,8 +72,9 @@ services:
     container_name: nginx
     ports:
       - "80:80"
+      - "3000:3000"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/default:/etc/nginx/sites-available/default
     networks:
       - web
 

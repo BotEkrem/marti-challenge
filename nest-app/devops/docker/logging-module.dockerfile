@@ -52,4 +52,4 @@ RUN npm run build
 
 CMD ["node", "dist/main.js"]
 
-EXPOSE 3005
+EXPOSE 3002
