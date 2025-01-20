@@ -11,6 +11,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('MARTI BACKEND TASK API')
+    .addServer(('/' + configService.get('PREFIX')) || '/prefix')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
     io.kompose.service: location-module
@@ -15,7 +14,6 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
         kompose.version: 1.35.0 (9532ceef3)
       labels:
         io.kompose.service: location-module
@@ -26,6 +24,8 @@ spec:
               value: "3004"
             - name: QUEUE_NAME
               value: location_queue
+            - name: PREFIX
+              value: location-module
           image: location-module:latest
           imagePullPolicy: Never
           name: location-module

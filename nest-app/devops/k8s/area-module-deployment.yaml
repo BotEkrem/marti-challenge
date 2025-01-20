@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
     io.kompose.service: area-module
@@ -15,7 +14,6 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
         kompose.version: 1.35.0 (9532ceef3)
       labels:
         io.kompose.service: area-module
@@ -26,7 +24,16 @@ spec:
               value: "3003"
             - name: QUEUE_NAME
               value: area_queue
+            - name: PREFIX
+              value: area-module
           image: area-module:latest
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "2m"
+            limits:
+              memory: "1024Mi"
+              cpu: "50m"
           imagePullPolicy: Never
           name: area-module
           ports:

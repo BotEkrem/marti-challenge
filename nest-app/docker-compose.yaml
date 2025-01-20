@@ -33,6 +33,7 @@ services:
     environment:
       QUEUE_NAME: auth_queue
       PORT: 3002
+      PREFIX: auth-module
     ports:
       - "3102:3002"
     networks:
@@ -44,6 +45,7 @@ services:
     environment:
       QUEUE_NAME: area_queue
       PORT: 3003
+      PREFIX: area-module
     ports:
       - "3103:3003"
     networks:
@@ -55,6 +57,7 @@ services:
     environment:
       QUEUE_NAME: location_queue
       PORT: 3004
+      PREFIX: location-module
     ports:
       - "3104:3004"
     networks:
@@ -66,6 +69,7 @@ services:
     environment:
       QUEUE_NAME: logging_queue
       PORT: 3005
+      PREFIX: logging-module
     ports:
       - "3105:3005"
     networks:

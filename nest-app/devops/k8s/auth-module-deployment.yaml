@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
     io.kompose.service: auth-module
@@ -15,7 +14,6 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: C:\Users\alany\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert -f ../../docker-compose.yaml
         kompose.version: 1.35.0 (9532ceef3)
       labels:
         io.kompose.service: auth-module
@@ -26,6 +24,8 @@ spec:
               value: "3002"
             - name: QUEUE_NAME
               value: auth_queue
+            - name: PREFIX
+              value: auth-module
           image: auth-module:latest
           imagePullPolicy: Never
           name: auth-module
