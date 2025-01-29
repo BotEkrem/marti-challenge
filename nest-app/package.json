@@ -7,7 +7,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "build:project": "bash ./build.sh",
+    "build:images": "bash ./build-images.sh",
+    "build:k8s": "bash ./build-k8s.sh",
+    "apply:k8s": "kubectl apply -f ./devops/k8s",
+    "delete:k8s": "kubectl delete -f ./devops/k8s",
+    "build:docker": "docker compose up -d",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

@@ -11,6 +11,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('MARTI BACKEND TASK API')
+    .addServer(('/' + configService.get('PREFIX')) || '/prefix')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -38,7 +39,7 @@ async function bootstrap() {
 
   app.enableCors();
   await app.startAllMicroservices();
-  await app.listen(configService.get('PORT'));
+  await app.listen(configService.get('PORT'), '0.0.0.0');
 }
 
 bootstrap();

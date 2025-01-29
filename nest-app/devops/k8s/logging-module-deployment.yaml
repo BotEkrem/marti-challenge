@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.version: 1.35.0 (9532ceef3)
+  labels:
+    io.kompose.service: logging-module
+  name: logging-module
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: logging-module
+  template:
+    metadata:
+      annotations:
+        kompose.version: 1.35.0 (9532ceef3)
+      labels:
+        io.kompose.service: logging-module
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "3005"
+            - name: QUEUE_NAME
+              value: logging_queue
+            - name: PREFIX
+              value: logging-module
+          image: logging-module:latest
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "2m"
+            limits:
+              memory: "1024Mi"
+              cpu: "50m"
+          imagePullPolicy: Never
+          name: logging-module
+          ports:
+            - containerPort: 3005
+              protocol: TCP
+      restartPolicy: Always
